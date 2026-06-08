@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hallucinated Span Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Finding the Lies Between the Lines</h1>
+      <p class="sub">Hallucination spans in LLM output &mdash; English subset (MuSHROOM 2025)</p>
+      <div class="controls">
+        <button id="next-btn">Next example &rarr;</button>
+        <select id="example-select" class="example-select"></select>
+        <label class="probe-pick">Probe:
+          <select id="probe-select" class="probe-select"></select>
+        </label>
+        <span id="rec-id" class="rec-id"></span>
+      </div>
+    </header>
+
+    <section class="block">
+      <h2>Question</h2>
+      <p id="question" class="question"></p>
+    </section>
+
+    <section class="block">
+      <h2>Annotator scores</h2>
+      <p class="hint">Background yellowness &prop; fraction of annotators who marked the
+        character as hallucinated. Hover any character for its value.</p>
+      <div class="mask-toggle">
+        <span class="mask-toggle-label">Token-focus mask:</span>
+        <label><input type="checkbox" id="mask-ne"> named entities</label>
+        <label><input type="checkbox" id="mask-rare"> rare terms</label>
+      </div>
+      <div id="gold-text" class="rendered"></div>
+      <div class="legend">
+        <span>low</span>
+        <span class="legend-bar"></span>
+        <span>high</span>
+        <span class="legend-sep"></span>
+        <span class="mask-key ne-key">named entity</span>
+        <span class="mask-key rare-key">rare term</span>
+      </div>
+      <ul id="gold-scores" class="scores"></ul>
+    </section>
+
+    <section class="block">
+      <h2>Compare gold vs. signal</h2>
+      <p class="hint">Pick a signal to line it up directly under the annotator row.
+        The closer the two patterns match, the higher the correlation.</p>
+      <div class="overlay-pick">
+        <select id="overlay-select" class="overlay-select"></select>
+        <span id="overlay-r" class="overlay-r"></span>
+      </div>
+      <div class="overlay">
+        <div class="overlay-label">annotators</div>
+        <div id="overlay-gold" class="rendered"></div>
+        <div class="overlay-label" id="overlay-sig-label">signal</div>
+        <div id="overlay-sig" class="rendered"></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2>10 resampled generations &mdash; <span class="probe-name"></span></h2>
+      <p class="hint">The same question asked 10 times (temperature 0.7). Hover a word
+        in the sentence below to see which generations contain it.</p>
+      <div id="hover-text" class="rendered"></div>
+      <div id="hover-badge" class="hover-badge"></div>
+      <ol id="generations" class="generations"></ol>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
