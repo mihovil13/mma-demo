@@ -259,7 +259,7 @@ async function init() {
   document.getElementById("mask-rare").addEventListener("change", reapplyMasks);
 
   document.getElementById("next-btn").addEventListener("click", () => show(randomOther()));
-  const firstIdx = records.findIndex((r) => r.id === "val-en-7");
+  const firstIdx = records.findIndex((r) => r.id === "val-en-1");
   show(firstIdx >= 0 ? firstIdx : 0);
 }
 
